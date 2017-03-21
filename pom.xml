@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.beyond</groupId>
+    <artifactId>java_jks</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <description>java 密钥库、导出证书</description>
+
+    <profiles>
+        <profile>
+            <!-- 本地环境 -->
+            <id>local</id>
+            <properties>
+                <log.path>/data/log/bm/</log.path>
+                <jar.scope>compile</jar.scope>
+                <env.path>local</env.path>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 开发环境 -->
+            <id>dev</id>
+            <properties>
+                <log.path>/data/log/bm/</log.path>
+                <jar.scope>provided</jar.scope>
+                <env.path>dev</env.path>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <log.path>/data/log/bm/</log.path>
+                <jar.scope>provided</jar.scope>
+                <env.path>test</env.path>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 准生产环境 -->
+            <id>standard</id>
+            <properties>
+                <log.path>/data/log/bm/</log.path>
+                <jar.scope>provided</jar.scope>
+                <env.path>standard</env.path>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 生产环境 -->
+            <id>prod</id>
+            <properties>
+                <log.path>/data/log/bm/</log.path>
+                <jar.scope>provided</jar.scope>
+                <env.path>prod</env.path>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <defaultGoal>clean package</defaultGoal>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- tomcat maven 插件配置 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat8-maven-plugin</artifactId>
+                <version>3.0-SNAPSHOT</version>
+                <configuration>
+                    <server>tomcat8</server>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <path>/ehcache-demo</path>
+                    <port>8080</port>
+                    <contextReloadable>true</contextReloadable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
